@@ -1,10 +1,8 @@
 #include <QMainWindow>
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
+class QWebEnginePage;
+class QWebEngineProfile;
+class QWebEngineView;
 
 class MainWindow : public QMainWindow
 {
@@ -14,6 +12,11 @@ public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
 
+protected:
+	void closeEvent(QCloseEvent *);
+
 private:
-	Ui::MainWindow *ui;
+	QWebEngineProfile *profile;
+	QWebEnginePage *page;
+	QWebEngineView *view;
 };

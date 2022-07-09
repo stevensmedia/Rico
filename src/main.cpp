@@ -1,8 +1,10 @@
 #include <QApplication>
+#include <QStandardPaths>
 
 #include "MainWindow.h"
 
 int main(int argc, char **argv) {
+	QCoreApplication::setOrganizationName("hakubi.us");
 	QApplication app(argc, argv);
 	MainWindow mainWindow;
 	mainWindow.show();

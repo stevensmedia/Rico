@@ -1,14 +1,12 @@
 TARGET = Rico
 
-QT += core widgets
+QT += core widgets webenginecore webenginewidgets
 
 CONFIG += c++latest
 
 SOURCES = src/main.cpp src/MainWindow.cpp
 
 HEADERS = src/MainWindow.h
-
-FORMS = src/MainWindow.ui
 
 DESTDIR = dist/
 
