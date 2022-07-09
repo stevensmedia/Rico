@@ -1,7 +1,10 @@
 #include "MainWindow.h"
 
+#include <QDesktopServices>
 #include <QDir>
 #include <QSettings>
+#include <QWebEngineNavigationRequest>
+#include <QWebEngineNewWindowRequest>
 #include <QWebEngineProfile>
 #include <QWebEnginePage>
 #include <QWebEngineView>
@@ -12,12 +15,27 @@ MainWindow::MainWindow(QWidget *parent)
 	, page(new QWebEnginePage(profile))
 	, view(new QWebEngineView(this))
 {
+	setWindowTitle("Rico");
+
 	QSettings settings;
 	restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
 	QDir().mkpath(profile->persistentStoragePath());
 	setCentralWidget(view);
 	view->setPage(page);
 	page->load(QUrl("https://tweetdeck.twitter.com/"));
+
+	connect(page, &QWebEnginePage::titleChanged, this, &QMainWindow::setWindowTitle);
+	connect(page, &QWebEnginePage::navigationRequested, [] (QWebEngineNavigationRequest &req) {
+		if(req.url() != QUrl("https://tweetdeck.twitter.com/")) {
+			QDesktopServices::openUrl(req.url());
+			req.reject();
+		}
+	});
+
+	connect(page, &QWebEnginePage::newWindowRequested, [] (QWebEngineNewWindowRequest &req) {
+		QDesktopServices::openUrl(req.requestedUrl());
+	});
+
 
 	restoreState(settings.value("mainWindowState").toByteArray());
 }
