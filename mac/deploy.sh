@@ -1,2 +1,2 @@
 #! /bin/sh
-cd "$IN_PWD"/dist && $(dirname "$QMAKE_QMAKE")/macdeployqt ./Rico.app -sign-for-notarization="ACFAF4D0A0552CB78274F2939913B5D3A838AA41" -always-overwrite -dmg
+cd "$IN_PWD"/dist && $(dirname "$QMAKE_QMAKE")/macdeployqt ./Rico.app -sign-for-notarization="D353AD23BDF92636AF0E7207A3EDE1F9FA3C7F2A" -always-overwrite -dmg
