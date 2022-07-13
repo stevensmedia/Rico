@@ -26,7 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	connect(page, &QWebEnginePage::titleChanged, this, &QMainWindow::setWindowTitle);
 	connect(page, &QWebEnginePage::navigationRequested, [] (QWebEngineNavigationRequest &req) {
-		if(req.url() != QUrl("https://tweetdeck.twitter.com/")) {
+		QString u = req.url().toString();
+		if(!u.contains("tweetdeck.twitter.com/") &&
+		   !u.contains("twitter.com/i/") &&
+		   !u.contains("accounts.google.com") &&
+		   !u.contains("twitter.com/login")) {
 			QDesktopServices::openUrl(req.url());
 			req.reject();
 		}

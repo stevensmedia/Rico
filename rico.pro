@@ -4,7 +4,7 @@ QT += core widgets webenginecore webenginewidgets
 
 CONFIG += c++latest
 
-VERSION = 0.9
+VERSION = 0.95
 
 SOURCES = src/main.cpp src/MainWindow.cpp
 
